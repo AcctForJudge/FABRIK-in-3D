@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://w6qugd0q4enf"]
+
+[ext_resource type="Script" uid="uid://ilocnv48urgl" path="res://Scripts/inner_for_cam.gd" id="1_375tr"]
+
+[node name="Outer" type="Node3D"]
+
+[node name="Inner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 10)
+script = ExtResource("1_375tr")
+
+[node name="Camera3D" type="Camera3D" parent="Inner"]

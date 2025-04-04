@@ -1,0 +1,159 @@
+[gd_scene load_steps=13 format=3 uid="uid://owab3kafwc6a"]
+
+[ext_resource type="Script" uid="uid://dn1fnlfc88ulp" path="res://Scripts/limb.gd" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://phyfjerd0xab" path="res://Scenes/point.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://w6qugd0q4enf" path="res://Scenes/camera.tscn" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://dtpyreo5oi3ak" path="res://scripts/camera_rotation.gd" id="4_jjvhh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gbba"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_jjvhh"]
+material = SubResource("StandardMaterial3D_8gbba")
+size = Vector2(1000, 1000)
+orientation = 1
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8gbba"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_8gbba"]
+turbidity = 0.0
+sun_disk_scale = 0.0
+ground_color = Color(1, 1, 1, 1)
+energy_multiplier = 4.85
+
+[sub_resource type="Sky" id="Sky_jjvhh"]
+sky_material = SubResource("PhysicalSkyMaterial_8gbba")
+
+[sub_resource type="Environment" id="Environment_kry3j"]
+background_mode = 2
+sky = SubResource("Sky_jjvhh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjvhh"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kry3j"]
+material = SubResource("StandardMaterial3D_jjvhh")
+
+[node name="Main" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("QuadMesh_jjvhh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_8gbba")
+debug_color = Color(0.969084, 0, 0.463677, 0.42)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1000, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kry3j")
+
+[node name="Limb" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+script = ExtResource("1_bo1nx")
+x_amp = -0.5
+z_amp = 40.0
+continuous_change = true
+
+[node name="Point" parent="Limb" instance=ExtResource("1_jjgbg")]
+
+[node name="Point2" parent="Limb" instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="Point3" parent="Limb" instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+
+[node name="Point4" parent="Limb" instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+
+[node name="Point5" parent="Limb" instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0)
+
+[node name="Point6" parent="Limb" instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51, 0)
+
+[node name="Target" type="Node3D" parent="Limb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 55, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Limb/Target"]
+mesh = SubResource("SphereMesh_kry3j")
+
+[node name="Lines" type="Node3D" parent="."]
+
+[node name="Outer" parent="." instance=ExtResource("3_8gbba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 68.6813, 118.839)
+
+[node name="Panel" type="Panel" parent="."]
+
+[node name="Target Position" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 752.0
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 51.0
+
+[node name="x" type="HSlider" parent="Panel/Target Position"]
+offset_left = 23.0
+offset_top = 4.0
+offset_right = 123.0
+offset_bottom = 20.0
+size_flags_horizontal = 2
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="Panel/Target Position/x"]
+layout_mode = 0
+offset_top = 19.0
+offset_right = 100.0
+offset_bottom = 42.0
+
+[node name="y" type="HSlider" parent="Panel/Target Position"]
+offset_left = 150.0
+offset_top = 4.0
+offset_right = 250.0
+offset_bottom = 20.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Panel/Target Position/y"]
+layout_mode = 0
+offset_top = 19.0
+offset_right = 100.0
+offset_bottom = 42.0
+
+[node name="z" type="HSlider" parent="Panel/Target Position"]
+offset_left = 278.0
+offset_top = 4.0
+offset_right = 378.0
+offset_bottom = 20.0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Panel/Target Position/z"]
+layout_mode = 0
+offset_top = 19.0
+offset_right = 100.0
+offset_bottom = 42.0
+
+[node name="Button" type="Button" parent="Panel/Target Position"]
+offset_left = 294.0
+offset_top = 83.0
+offset_right = 376.0
+offset_bottom = 114.0
+size_flags_horizontal = 10
+text = "Tranform
+"
+
+[node name="CameraRotation" type="Node2D" parent="."]
+script = ExtResource("4_jjvhh")
+sense = 0.3
+
+[connection signal="value_changed" from="Panel/Target Position/x" to="Limb" method="_on_x_value_changed"]
+[connection signal="value_changed" from="Panel/Target Position/y" to="Limb" method="_on_y_value_changed"]
+[connection signal="value_changed" from="Panel/Target Position/z" to="Limb" method="_on_z_value_changed"]
+[connection signal="pressed" from="Panel/Target Position/Button" to="Limb" method="_on_button_pressed"]
+
+[editable path="Outer"]
