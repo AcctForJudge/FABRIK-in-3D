@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dn1fnlfc88ulp" path="res://Scripts/limb.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://phyfjerd0xab" path="res://Scenes/point.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://w6qugd0q4enf" path="res://Scenes/camera.tscn" id="3_8gbba"]
-[ext_resource type="Script" uid="uid://dtpyreo5oi3ak" path="res://scripts/camera_rotation.gd" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://cnhojjfb7svrp" path="res://Scripts/outer_for_camera.gd" id="4_jjvhh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gbba"]
 albedo_color = Color(0, 0, 0, 1)
@@ -86,6 +86,10 @@ mesh = SubResource("SphereMesh_kry3j")
 
 [node name="Outer" parent="." instance=ExtResource("3_8gbba")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 68.6813, 118.839)
+script = ExtResource("4_jjvhh")
+
+[node name="Inner" parent="Outer" index="0"]
+script = null
 
 [node name="Panel" type="Panel" parent="."]
 
@@ -97,6 +101,7 @@ offset_right = 1152.0
 offset_bottom = 51.0
 
 [node name="x" type="HSlider" parent="Panel/Target Position"]
+layout_mode = 0
 offset_left = 23.0
 offset_top = 4.0
 offset_right = 123.0
@@ -111,6 +116,7 @@ offset_right = 100.0
 offset_bottom = 42.0
 
 [node name="y" type="HSlider" parent="Panel/Target Position"]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 4.0
 offset_right = 250.0
@@ -125,6 +131,7 @@ offset_right = 100.0
 offset_bottom = 42.0
 
 [node name="z" type="HSlider" parent="Panel/Target Position"]
+layout_mode = 0
 offset_left = 278.0
 offset_top = 4.0
 offset_right = 378.0
@@ -139,6 +146,7 @@ offset_right = 100.0
 offset_bottom = 42.0
 
 [node name="Button" type="Button" parent="Panel/Target Position"]
+layout_mode = 0
 offset_left = 294.0
 offset_top = 83.0
 offset_right = 376.0
@@ -146,10 +154,6 @@ offset_bottom = 114.0
 size_flags_horizontal = 10
 text = "Tranform
 "
-
-[node name="CameraRotation" type="Node2D" parent="."]
-script = ExtResource("4_jjvhh")
-sense = 0.3
 
 [connection signal="value_changed" from="Panel/Target Position/x" to="Limb" method="_on_x_value_changed"]
 [connection signal="value_changed" from="Panel/Target Position/y" to="Limb" method="_on_y_value_changed"]

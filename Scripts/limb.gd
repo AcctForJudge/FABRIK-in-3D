@@ -1,7 +1,7 @@
 extends Node3D
 
 
-@onready var button: Button = $"../Panel/Target Position/GridContainer/Button"
+@onready var button: Button = $"../Panel/Target Position/Button"
 @onready var x: HSlider = $"../Panel/Target Position/x"
 @onready var y: HSlider = $"../Panel/Target Position/y"
 @onready var z: HSlider = $"../Panel/Target Position/z"
